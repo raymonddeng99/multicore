@@ -18,4 +18,14 @@ struct Backoff {
 	vodi backoff();
 }
 
+class BackoffLock {
+public:
+	void lock();
+	void unlock();
+private:
+	std::atomic<bool> lock_stream;
+	int MIN_DELAY;
+	int MAX_DELAY;
+}
+
 #endif
