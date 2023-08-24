@@ -2,7 +2,11 @@
 #define multicoreH
 
 struct TASLock {
-public:
+	void lock();
+	void unlock();
+}
+
+struct TTasLock {
 	void lock();
 	void unlock();
 }
