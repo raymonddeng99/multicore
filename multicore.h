@@ -11,4 +11,11 @@ struct TTasLock {
 	void unlock();
 }
 
+struct Backoff {
+	int minDelay, maxDelay;
+	int limit;
+	Backoff(int min, int max);
+	vodi backoff();
+}
+
 #endif

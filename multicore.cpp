@@ -1,5 +1,6 @@
 #include "multicore.h"
 #include <atomic>
+#include <rand>
 
 // test-and-set lock
 
@@ -32,5 +33,20 @@ struct TTasLock {
 
 	void unlock() {
 		state.store(false);
+	}
+}
+
+struct Backoff {
+	int minDelay, maxDelay;
+	int limit;
+	Backoff(int min, int max) {
+		minDelay = min;
+		maxDelay = max;
+		limit = minDelay;
+	}
+	void backoff() {
+		int delay = std::rand();
+		limit = min(maxDelay, 2 * limit);
+		Sleep(limit);
 	}
 }
