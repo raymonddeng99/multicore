@@ -28,4 +28,17 @@ private:
 	int MAX_DELAY;
 }
 
+class ALock {
+public:
+    ALock(int capacity);
+    void lock();
+    void unlock();
+
+private:
+    std::atomic<int> tail;
+    std::vector<bool> flag;
+    int size;
+    thread_local int mySlotIndex;
+};
+
 #endif

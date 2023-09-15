@@ -75,3 +75,17 @@ private:
 	int MIN_DELAY = 0;
 	int MAX_DELAY = 0;
 }
+
+class ALock {
+public:
+	void lock() {
+		int slot = tail.fetch_add(1) % size;
+	    mySlotIndex = slot;
+	    while (!flag[slot]) {}
+	}
+	void unlock() {
+		int slot = mySlotIndex;
+	    flag[slot] = false;
+	    flag[(slot + 1) % size] = true;
+	}
+}
